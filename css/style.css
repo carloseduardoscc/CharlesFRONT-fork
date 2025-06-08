@@ -125,7 +125,7 @@ section .hero-content
     color: rgb(255, 255, 255); /* Cor do texto (ajuste conforme necessário) */
     text-align: center; /* Centraliza o texto horizontalmente */
     width: 100%; /* Garante que o conteúdo ocupe toda a largura */
-    z-index: 1; /* Garante que o conteúdo fique acima do vídeo */
+    z-index: 999999; /* Garante que o conteúdo fique acima do vídeo */
 }
 
 section .hero-content h1

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charles - Home/Dashboard</title>
+    <link rel="stylesheet" href="css/Home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="material-icons menu-icon">menu</span>
+            <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
+        </div>
+        <div class="header-right">
+            <span class="material-icons notifications-icon">notifications</span>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
+                <span>Usuário Suporte</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li class="active"><a href="#"><span class="material-icons">dashboard</span>Dashboard</a></li>
+                    <li><a href="#"><span class="material-icons">support_agent</span>Meus Chamados</a></li>
+                    <li><a href="#"><span class="material-icons">add_circle_outline</span>Abrir Chamado</a></li>
+                    <li><a href="#"><span class="material-icons">library_books</span>Base de Conhecimento</a></li>
+                    <li><a href="#"><span class="material-icons">bar_chart</span>Relatórios de Chamados</a></li>
+                    <li><a href="#"><span class="material-icons">settings</span>Configurações</a></li>
+                    <li><a href="index.html"><span class="material-icons">logout</span>Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="welcome-section">
+                <h2>Olá, Usuário Suporte</h2>
+                <p>Bem-vindo ao Charles, o seu painel de gerenciamento de chamados.</p>
+            </section>
+
+            <section class="dashboard-overview">
+                <div class="card calls-card">
+                    <h3>Chamados Abertos</h3>
+                    <p class="calls-count">...</p> 
+                    <button class="btn open-new-call">+ New Ticket</button>
+                </div>
+
+                </section>
+
+            <section class="recent-calls-section">
+                <h3>Chamados Recentes</h3>
+                <div class="calls-filter">
+                    <input type="date" value="2025-06-07">
+                    <select>
+                        <option>Todos</option>
+                        <option>Aberto</option>
+                        <option>Em Andamento</option>
+                        <option>Fechado</option>
+                    </select>
+                </div>
+                <ul class="calls-list">
+                    </ul>
+                <button class="btn view-all-calls">Ver todos os Chamados</button>
+            </section>
+        </main>
+    </div>
+
+    <div id="newCallModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button material-icons">close</span>
+            <h2>NEW TICKET</h2> <form id="newCallForm">
+                <div class="form-group">
+                    <label for="callerName">Nome:</label>
+                    <input type="text" id="callerName" name="callerName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="callDate">Data:</label>
+                    <input type="text" id="callDate" name="callDate" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="department">Departamento:</label>
+                    <select id="department" name="department" required>
+                        <option value="">Selecione um departamento</option>
+                        <option value="TI">TI</option>
+                        <option value="RH">Recursos Humanos</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="responsible">Responsável:</label>
+                    <input type="text" id="responsible" name="responsible" placeholder="Nome do responsável" required>
+                </div>
+                <div class="form-group">
+                    <label for="urgencyLevel">Nível de Urgência:</label>
+                    <select id="urgencyLevel" name="urgencyLevel" required>
+                        <option value="">Selecione a urgência</option>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Média">Média</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Urgente">Urgente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="callReason">Motivo do Chamado:</label>
+                    <textarea id="callReason" name="callReason" rows="4" placeholder="Descreva o motivo do seu chamado..." required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn confirm-btn">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="javascript/Home.js"></script>
+</body>
+</html>

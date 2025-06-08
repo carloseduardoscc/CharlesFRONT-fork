@@ -1,0 +1,569 @@
+/* Variáveis de Cores (baseadas na Imagem 2) */
+:root {
+    --primary-blue-dark: #3d9073; /* Azul escuro do cabeçalho/fundo */
+    --primary-blue-light: #3d9073; /* Azul para botões/destaques */
+    --text-color-dark: #333; /* Provavelmente precisará ser ajustado para branco em elementos escuros */
+    --text-color-light: #fff;
+    --background-light: #242424; /* Fundo geral escuro */
+    --card-background: #000000; /* Fundo dos cards escuro */
+    --border-color: #e0e0e0; /* Borda clara, talvez precise ser ajustada para contraste */
+    --success-green: #4CAF50;    /* Usado para status "Fechado" ou positivo */
+    --warning-orange: #FFC107;   /* Usado para status "Em Andamento" */
+    --danger-red: #F44336;      /* Usado para status "Aberto" ou urgente */
+    --secondary-text: #757575; /* Texto secundário cinza, talvez precise ser mais claro */
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-color-light); /* Alterado para light para melhor contraste com o fundo escuro */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background-color: var(--primary-blue-dark);
+    color: var(--text-color-light);
+    display: flex;
+    flex-direction: row;
+    padding: 15px 25px;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 60px;
+    position: sticky; /* Fixa o header no topo */
+    top: 0;
+    z-index: 1000; /* Garante que o header fique acima de outros elementos */
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: 40px;
+    margin-right: 15px;
+    cursor: pointer;
+    display: none; /* Por padrão, oculto em desktop, será mostrado apenas em mobile */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.notifications-icon {
+    font-size: 28px;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 2px solid var(--primary-blue-light);
+}
+
+/* Container principal (sidebar + main content) */
+.container {
+    display: flex;
+    flex: 1; /* Faz o container ocupar o espaço restante */
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: var(--card-background);
+    width: 250px;
+    padding: 20px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
+    border-right: 1px solid var(--border-color);
+    transition: transform 0.3s ease-in-out; /* Adiciona transição para o slide */
+    flex-shrink: 0; /* Impede que a sidebar encolha */
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 5px;
+}
+
+.sidebar nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 25px;
+    color: var(--text-color-light); /* Alterado para light para contraste com fundo do card */
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar nav ul li a .material-icons {
+    margin-right: 15px;
+    font-size: 24px;
+    color: var(--primary-blue-light);
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li.active a {
+    background-color: var(--primary-blue-light);
+    color: var(--text-color-light);
+    border-left: 5px solid var(--primary-blue-dark);
+}
+
+.sidebar nav ul li.active a .material-icons {
+    color: var(--text-color-light);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1; /* Ocupa o espaço restante */
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.welcome-section h2 {
+    font-size: 28px;
+    margin-bottom: 5px;
+    color: var(--primary-blue-light); /* Ajustado para melhor visibilidade em fundo escuro */
+}
+
+.welcome-section p {
+    color: var(--secondary-text); /* Manter se o contraste for bom, senão ajustar para mais claro */
+    font-size: 16px;
+}
+
+/* Dashboard Overview */
+.dashboard-overview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais visível em fundo escuro */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--text-color-light); /* Texto do card em light para contraste */
+}
+
+.card h3 {
+    font-size: 20px;
+    color: var(--primary-blue-light); /* Ajustado para melhor visibilidade em fundo escuro */
+    margin-bottom: 15px;
+}
+
+/* Specific styles for Help Desk cards */
+.calls-card .calls-count {
+    font-size: 36px;
+    font-weight: bold;
+    color: var(--primary-blue-light); /* Cor de destaque para o número de chamados */
+    margin-bottom: 20px;
+}
+
+.btn {
+    background-color: var(--primary-blue-light);
+    color: var(--text-color-light);
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.btn:hover {
+    background-color: #2e715b; /* Um tom um pouco mais escuro do seu primary-blue-light */
+}
+
+/* Charts */
+.chart-card {
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.chart-card canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Recent Calls Section */
+.recent-calls-section {
+    background-color: var(--card-background);
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra mais visível em fundo escuro */
+    color: var(--text-color-light); /* Texto do card em light para contraste */
+}
+
+.recent-calls-section h3 {
+    font-size: 22px;
+    color: var(--primary-blue-light); /* Ajustado para melhor visibilidade em fundo escuro */
+    margin-bottom: 20px;
+}
+
+.calls-filter {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.calls-filter input[type="date"],
+.calls-filter select {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    color: var(--text-color-light); /* Alterado para light para contraste com fundo escuro */
+    background-color: var(--background-light); /* Fundo do input/select escuro */
+}
+.calls-filter input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Inverte a cor do ícone do calendário para ser visível em fundo escuro */
+}
+.calls-filter select option {
+    background-color: var(--background-light); /* Fundo das opções do select escuro */
+    color: var(--text-color-light);
+}
+
+
+.calls-list {
+    list-style: none;
+    border-top: 1px solid var(--border-color);
+}
+
+.call {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.call:last-child {
+    border-bottom: none;
+}
+
+.call-icon {
+    font-size: 32px;
+    margin-right: 15px;
+}
+
+/* Cores dos ícones e status dos chamados */
+.call.status-open .call-icon, .call-status.open {
+    color: var(--danger-red);
+}
+
+.call.status-in-progress .call-icon, .call-status.in-progress {
+    color: var(--warning-orange);
+}
+
+.call.status-closed .call-icon, .call-status.closed {
+    color: var(--success-green);
+}
+
+.call-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.call-description {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--text-color-light); /* Alterado para light para contraste */
+}
+
+.call-date {
+    font-size: 14px;
+    color: var(--secondary-text); /* Manter se o contraste for bom, senão ajustar para mais claro */
+}
+
+.call-status {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    min-width: 100px;
+    text-align: center;
+}
+
+.call-status.open {
+    background-color: rgba(244, 67, 54, 0.1);
+}
+
+.call-status.in-progress {
+    background-color: rgba(255, 193, 7, 0.1);
+}
+
+.call-status.closed {
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.view-all-calls {
+    margin-top: 20px;
+    width: auto;
+}
+
+/* ====================================================== */
+/* Responsive adjustments for Hamburger Menu (mantido) */
+/* ====================================================== */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block;
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+
+    .container {
+        flex-direction: column;
+        position: relative;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 60px; /* Altura do header */
+        left: 0;
+        height: calc(100% - 60px);
+        transform: translateX(-100%);
+        z-index: 999;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+        width: 250px;
+        border-right: none;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        padding: 15px;
+        width: 100%;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 998;
+        display: none;
+    }
+
+    .overlay.active {
+        display: block;
+    }
+
+    .header-right .user-profile span {
+        display: none;
+    }
+
+    .sidebar nav ul {
+        display: block;
+    }
+    .sidebar nav ul li a {
+        flex-direction: row;
+        text-align: left;
+    }
+    .sidebar nav ul li a .material-icons {
+        margin-right: 15px;
+        margin-bottom: 0;
+    }
+    .sidebar nav ul li.active a {
+        border-bottom: none;
+        border-left: 5px solid var(--primary-blue-dark);
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+    .menu-icon {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+    .notifications-icon {
+        font-size: 24px;
+        margin-right: 10px;
+    }
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
+    .welcome-section h2 {
+        font-size: 24px;
+    }
+    .card h3 {
+        font-size: 18px;
+    }
+    .calls-card .calls-count {
+        font-size: 30px;
+    }
+    .recent-calls-section h3 {
+        font-size: 20px;
+    }
+    .call-description {
+        font-size: 16px;
+    }
+    .call-status {
+        font-size: 16px;
+    }
+}
+
+
+/* ====================================================== */
+/* START: Estilos para o Pop-up (Modal) */
+/* ====================================================== */
+.modal-overlay {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro, mais opaco para o modal */
+    display: flex; /* Usar flexbox para centralizar */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Acima de tudo, incluindo o header e sidebar */
+}
+
+.modal-content {
+    background-color: var(--card-background); /* Fundo do modal igual ao dos cards */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    width: 90%; /* Largura padrão */
+    max-width: 500px; /* Largura máxima para desktops */
+    position: relative;
+    color: var(--text-color-light); /* Texto do modal em light */
+}
+
+.modal-content h2 {
+    color: var(--primary-blue-light); /* Título do modal com cor de destaque */
+    margin-bottom: 25px;
+    font-size: 24px;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: var(--secondary-text); /* Cor para o 'x' de fechar */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: var(--text-color-light); /* Fica branco ao passar o mouse */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-blue-light); /* Cor do label para destaque */
+}
+
+.form-group input[type="text"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333; /* Borda um pouco mais clara para inputs em tema escuro */
+    border-radius: 5px;
+    background-color: #1a1a1a; /* Fundo dos inputs mais escuro que o card */
+    color: var(--text-color-light); /* Texto digitado light */
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-blue-light); /* Borda fica azul ao focar */
+}
+
+.form-group input[readonly] {
+    background-color: #0d0d0d; /* Fundo ainda mais escuro para campos readonly */
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.form-group textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 80px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end; /* Botões à direita */
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.form-actions .btn {
+    padding: 10px 25px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.form-actions .cancel-btn {
+    background-color: var(--secondary-text); /* Cor cinza para cancelar */
+    color: var(--text-color-light);
+}
+
+.form-actions .cancel-btn:hover {
+    background-color: #555;
+}
+
+/* Esconde o modal quando a classe 'active' não está presente */
+.modal-overlay:not(.active) {
+    display: none;
+}
+/* ====================================================== */
+/* END: Estilos para o Pop-up (Modal) */
+/* ====================================================== */

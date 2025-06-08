@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Chamado</title>
+    <link rel="stylesheet" href="css/Home.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                <span class="material-icons">arrow_back</span>Voltar
+            </a>
+        </div>
+        <div class="header-right">
+            </div>
+    </header>
+
+    <div class="container">
+        <main class="main-content">
+            <section class="call-details-section">
+                <h2>Detalhes do Chamado</h2>
+                <div id="callDetails" class="card"> </div>
+
+                <form id="updateCallForm" class="card"> <h3>Atualizar Chamado</h3>
+                    <div class="form-group">
+                        <label for="status">Status:</label>
+                        <select id="status" name="status" required>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Fechado">Fechado</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-actions"> <button type="submit" class="btn">Atualizar Status</button>
+                        <button type="button" id="printCallBtn" class="btn secondary-btn">Imprimir Chamado</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const callCode = urlParams.get('code');
+            const callDetailsDiv = document.getElementById('callDetails');
+            const updateCallForm = document.getElementById('updateCallForm');
+            const statusSelect = document.getElementById('status');
+            const printCallBtn = document.getElementById('printCallBtn'); // Novo seletor para o botão de imprimir
+
+            // Carrega todos os chamados do localStorage
+            let storedCalls = localStorage.getItem('allCalls'); // Deve ser 'allCalls' para consistência
+            let allCalls = storedCalls ? JSON.parse(storedCalls) : [];
+
+            // Encontra o chamado específico pelo código
+            const call = allCalls.find(c => c.code === callCode);
+
+            // Função para exibir os detalhes do chamado (APENAS AQUI NESTE ARQUIVO)
+            function displayCallDetails(currentCall) {
+                if (currentCall) {
+                    callDetailsDiv.innerHTML = `
+                        <p><strong>Código:</strong> ${currentCall.code}</p>
+                        <p><strong>Nome:</strong> ${currentCall.name}</p>
+                        <p><strong>Data:</strong> ${currentCall.date}</p>
+                        <p><strong>Departamento:</strong> ${currentCall.department}</p>
+                        <p><strong>Responsável:</strong> ${currentCall.responsible}</p>
+                        <p><strong>Nível de Urgência:</strong> ${currentCall.urgencyLevel}</p>
+                        <p><strong>Motivo:</strong> ${currentCall.reason}</p>
+                        <p><strong>Status Atual:</strong> <span class="call-status ${currentCall.status.toLowerCase().replace(' ', '-')}">${currentCall.status}</span></p>
+                    `;
+                    statusSelect.value = currentCall.status;
+                } else {
+                    callDetailsDiv.innerHTML = '<p>Chamado não encontrado.</p>';
+                }
+            }
+
+            // Exibe os detalhes iniciais do chamado
+            displayCallDetails(call);
+
+            // Lógica para atualizar o status do chamado
+            if(updateCallForm) {
+                updateCallForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const newStatus = statusSelect.value;
+
+                    const callIndex = allCalls.findIndex(c => c.code === callCode);
+
+                    if (callIndex !== -1) {
+                        allCalls[callIndex].status = newStatus;
+                        localStorage.setItem('allCalls', JSON.stringify(allCalls));
+                        displayCallDetails(allCalls[callIndex]);
+
+                        alert('Status do chamado atualizado com sucesso!');
+                    } else {
+                        alert('Erro ao atualizar o status do chamado.');
+                    }
+                });
+            }
+
+            // Lógica para o botão de imprimir
+            if (printCallBtn) {
+                printCallBtn.addEventListener('click', () => {
+                    const contentToPrint = document.getElementById('callDetails').innerHTML;
+
+                    const printWindow = window.open('', '', 'height=600,width=800');
+                    printWindow.document.write('<html><head><title>Imprimir Chamado</title>');
+                    printWindow.document.write('<link rel="stylesheet" href="style.css" type="text/css" media="print" />');
+                    printWindow.document.write('</head><body>');
+                    printWindow.document.write('<h2>Detalhes do Chamado</h2>');
+                    printWindow.document.write(contentToPrint);
+                    printWindow.document.write('</body></html>');
+                    printWindow.document.close();
+                    
+                    printWindow.onload = function() {
+                        printWindow.focus();
+                        printWindow.print();
+                        printWindow.close();
+                    };
+                });
+            }
+        });
+    </script>
+</body>
+</html>
