@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles - Home/Dashboard</title>
-    <link rel="stylesheet" href="css/Home.css">
+    <title>Tickets & Transferência - Charles Help Desk</title>
+    
+    <link rel="stylesheet" href="css/tickets-and-transfer.css"> 
+    
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-    <header class="header">
+   <header class="header">
         <div class="header-left">
             <span class="material-icons menu-icon">menu</span>
             <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
@@ -23,51 +28,57 @@
         </div>
     </header>
 
-    <div class="container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li class="active"><a href="#"><span class="material-icons">dashboard</span>Dashboard</a></li>
-                    <li><a href="#"><span class="material-icons">support_agent</span>Meus Chamados</a></li>
-                    <li><a href="Ticket_Transfer.html"><span class="material-icons">swap_horiz</span>Tickets & Transferência</a></li>
-                    <li><a href="#"><span class="material-icons">add_circle_outline</span>Abrir Chamado</a></li>
-                    <li><a href="#"><span class="material-icons">library_books</span>Base de Conhecimento</a></li>
-                    <li><a href="#"><span class="material-icons">bar_chart</span>Relatórios de Chamados</a></li>
-                    <li><a href="#"><span class="material-icons">settings</span>Configurações</a></li>
-                    <li><a href="index.html"><span class="material-icons">logout</span>Sair</a></li>
-                </ul>
-            </nav>
-        </aside>
+  
 
         <main class="main-content">
-            <section class="welcome-section">
-                <h2>Olá, Usuário Suporte</h2>
-                <p>Bem-vindo ao Charles, o seu painel de gerenciamento de chamados.</p>
+            <section class="tickets-header">
+                <div class="tickets-header-top">
+                    <div>
+                        <h2>Tickets & Transferência</h2>
+                        <p>Gerencie e acompanhe os tickets de suporte</p>
+                    </div>
+                    <button class="btn new-ticket-btn">
+                        <span class="material-icons">add</span>Novo Ticket
+                    </button>
+                </div>
+
+                <div class="tickets-filters">
+                    <div class="search-box">
+                        <span class="material-icons">search</span>
+                        <input type="text" id="ticketSearch" placeholder="Pesquisar por número do ticket, solicitante ou descrição...">
+                    </div>
+                    <div class="status-filter">
+                        <select id="statusFilter">
+                            <option value="All">Todos os Status</option>
+                            <option value="Aberto">Aberto</option>
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Fechado">Fechado</option>
+                            <option value="Atribuído">Atribuído</option>
+                            <option value="Concluído">Concluído</option>
+                        </select>
+                        <span class="material-icons arrow-down">arrow_drop_down</span>
+                    </div>
+                </div>
             </section>
 
-            <section class="dashboard-overview">
-                <div class="card calls-card">
-                    <h3>Chamados Abertos</h3>
-                    <p class="calls-count">...</p> 
-                    <button class="btn open-new-call">+ New Ticket</button>
-                </div>
-
-                </section>
-
-            <section class="recent-calls-section">
-                <h3>Chamados Recentes</h3>
-                <div class="calls-filter">
-                    <input type="date" value="2025-06-07">
-                    <select>
-                        <option>Todos</option>
-                        <option>Aberto</option>
-                        <option>Em Andamento</option>
-                        <option>Fechado</option>
-                    </select>
-                </div>
-                <ul class="calls-list">
-                    </ul>
-                <button class="btn view-all-calls">Ver todos os Chamados</button>
+            <section class="tickets-table-section">
+                <table class="tickets-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket #</th>
+                            <th>Solicitante</th>
+                            <th>Departamento</th>
+                            <th>Tipo</th>
+                            <th>Prioridade</th>
+                            <th>Criado em</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketsTableBody">
+                        </tbody>
+                </table>
+                <p id="noTicketsMessage" style="text-align: center; color: var(--secondary-text); padding: 20px; display: none;">Nenhum ticket encontrado.</p>
             </section>
         </main>
     </div>
@@ -75,7 +86,8 @@
     <div id="newCallModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-button material-icons">close</span>
-            <h2>NEW TICKET</h2> <form id="newCallForm">
+            <h2>NOVO TICKET</h2>
+            <form id="newCallForm">
                 <div class="form-group">
                     <label for="callerName">Nome:</label>
                     <input type="text" id="callerName" name="callerName" readonly>
@@ -120,6 +132,13 @@
             </form>
         </div>
     </div>
-    <script src="javascript/Home.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+    <script src="tickets-and-transfer.js"></script>
 </body>
 </html>
