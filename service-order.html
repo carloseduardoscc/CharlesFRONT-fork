@@ -1,148 +1,132 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ordens de Serviço - Charles Help Desk</title>
-    
-    <link rel="stylesheet" href="css/service-orders.css"> 
-    
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles² - Ordem de Serviço</title>
+  <link rel="stylesheet" href="css/service-order.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <div class="header-left">
-            <span class="material-icons menu-icon">menu</span>
-            <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
+  <header class="header">
+    <div class="header-left">
+      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+        <span class="material-icons">arrow_back</span>Voltar
+      </a>
+    </div>
+    <div class="header-right">
+      <span class="material-icons">print</span>
+      <span class="material-icons">save</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="service-order-header">
+        <h1>Ordem de Serviço</h1>
+        <div class="order-info">
+          <span><strong>Nº OS:</strong> 2023-OS-00158</span>
+          <span><strong>Data:</strong> 15/11/2023</span>
+          <span><strong>Status:</strong> <span class="status in-progress">Em Andamento</span></span>
         </div>
-        <div class="header-right">
-            <span class="material-icons notifications-icon">notifications</span>
-            <div class="user-profile">
-                <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
-                <span>John Owner</span> 
+      </div>
+      
+      <div class="order-sections">
+        <section class="order-section client-info">
+          <h2><span class="material-icons">person</span> Informações do Cliente</h2>
+          <div class="info-grid">
+            <div>
+              <label>Nome:</label>
+              <p>Empresa XYZ Ltda</p>
             </div>
-        </div>
-    </header>
-
-    <div class="container">
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="index.html"><span class="material-icons">dashboard</span>Dashboard</a></li>
-                    <li><a href="tickets-and-transfer.html"><span class="material-icons">swap_horiz</span>Tickets & Transferência</a></li>
-                    <li class="active"><a href="service-orders.html"><span class="material-icons">build</span>Ordens de Serviço</a></li> <li><a href="#"><span class="material-icons">support_agent</span>Meus Chamados</a></li>
-                    <li><a href="#" class="open-new-call-sidebar"><span class="material-icons">add_circle_outline</span>Abrir Chamado</a></li>
-                    <li><a href="#"><span class="material-icons">library_books</span>Base de Conhecimento</a></li>
-                    <li><a href="#"><span class="material-icons">bar_chart</span>Relatórios de Chamados</a></li>
-                    <li><a href="#"><span class="material-icons">settings</span>Configurações</a></li>
-                    <li><a href="#"><span class="material-icons">logout</span>Sair</a></li>
-                </ul>
-            </nav>
-        </aside>
-
-        <main class="main-content">
-            <section class="service-orders-header">
-                <div class="service-orders-header-top">
-                    <div>
-                        <h2>Ordens de Serviço</h2>
-                        <p>Gerencie e acompanhe as ordens de serviço</p>
-                    </div>
-                    </div>
-
-                <div class="service-orders-filters">
-                    <div class="search-box">
-                        <span class="material-icons">search</span>
-                        <input type="text" id="serviceOrderSearch" placeholder="Pesquisar por número da ordem ou descrição...">
-                    </div>
-                    <div class="status-filter">
-                        <select id="serviceOrderStatusFilter">
-                            <option value="All">Todos os Status</option>
-                            <option value="OPEN">OPEN</option>
-                            <option value="ASSIGNED">ASSIGNED</option>
-                            <option value="COMPLETED">COMPLETED</option>
-                            </select>
-                        <span class="material-icons arrow-down">arrow_drop_down</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="service-orders-table-section">
-                <table class="service-orders-table">
-                    <thead>
-                        <tr>
-                            <th>Order #</th>
-                            <th>Ticket #</th>
-                            <th>Requester</th>
-                            <th>Supporter</th>
-                            <th>Created</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="serviceOrdersTableBody">
-                        </tbody>
-                </table>
-                <p id="noServiceOrdersMessage" style="text-align: center; color: var(--secondary-text); padding: 20px; display: none;">Nenhuma ordem de serviço encontrada.</p>
-            </section>
-        </main>
-    </div>
-
-    <div id="newCallModal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-button material-icons">close</span>
-            <h2>NOVA ORDEM DE SERVIÇO</h2>
-            <form id="newCallForm">
-                <div class="form-group">
-                    <label for="callerName">Solicitante:</label>
-                    <input type="text" id="callerName" name="callerName" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="callDate">Data:</label>
-                    <input type="text" id="callDate" name="callDate" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="department">Departamento:</label>
-                    <select id="department" name="department" required>
-                        <option value="">Selecione um departamento</option>
-                        <option value="TI">TI</option>
-                        <option value="RH">Recursos Humanos</option>
-                        <option value="Financeiro">Financeiro</option>
-                        <option value="Comercial">Comercial</option>
-                        <option value="Marketing">Marketing</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="responsible">Suporte Responsável:</label>
-                    <input type="text" id="responsible" name="responsible" placeholder="Nome do responsável" required>
-                </div>
-                <div class="form-group">
-                    <label for="urgencyLevel">Prioridade:</label>
-                    <select id="urgencyLevel" name="urgencyLevel" required>
-                        <option value="">Selecione a prioridade</option>
-                        <option value="Baixa">Baixa</option>
-                        <option value="Média">Média</option>
-                        <option value="Alta">Alta</option>
-                        <option value="Urgente">Urgente</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="callReason">Descrição da Ordem de Serviço:</label>
-                    <textarea id="callReason" name="callReason" rows="4" placeholder="Descreva a ordem de serviço..." required></textarea>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn cancel-btn">Cancelar</button>
-                    <button type="submit" class="btn confirm-btn">Confirmar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
-    <script src="script.js"></script> 
-    <script src="service-orders.js"></script> </body>
+            <div>
+              <label>Responsável:</label>
+              <p>João da Silva</p>
+            </div>
+            <div>
+              <label>Telefone:</label>
+              <p>(11) 99999-9999</p>
+            </div>
+            <div>
+              <label>Email:</label>
+              <p>contato@empresaxyz.com.br</p>
+            </div>
+          </div>
+        </section>
+        
+        <section class="order-section service-info">
+          <h2><span class="material-icons">build</span> Detalhes do Serviço</h2>
+          <div class="info-grid">
+            <div>
+              <label>Tipo de Serviço:</label>
+              <p>Manutenção Corretiva</p>
+            </div>
+            <div>
+              <label>Equipamento:</label>
+              <p>Servidor HP DL380</p>
+            </div>
+            <div>
+              <label>Prioridade:</label>
+              <p class="priority high">Alta</p>
+            </div>
+            <div>
+              <label>Previsão:</label>
+              <p>20/11/2023</p>
+            </div>
+          </div>
+          
+          <div class="problem-description">
+            <label>Descrição do Problema:</label>
+            <p>Servidor apresentando falhas intermitentes de conexão com o storage. Eventos de timeout registrados no log do sistema. Necessário diagnóstico completo e substituição de possíveis componentes defeituosos.</p>
+          </div>
+        </section>
+        
+        <section class="order-section execution-info">
+          <h2><span class="material-icons">assignment</span> Execução do Serviço</h2>
+          <div class="info-grid">
+            <div>
+              <label>Técnico Responsável:</label>
+              <p>Carlos Oliveira</p>
+            </div>
+            <div>
+              <label>Data de Início:</label>
+              <p>16/11/2023 09:30</p>
+            </div>
+          </div>
+          
+          <div class="service-steps">
+            <label>Etapas do Serviço:</label>
+            <ol>
+              <li>Diagnóstico inicial do hardware</li>
+              <li>Teste dos componentes de rede</li>
+              <li>Substituição da placa de rede</li>
+              <li>Testes de stress do sistema</li>
+            </ol>
+          </div>
+          
+          <div class="observations">
+            <label>Observações:</label>
+            <p>Placa de rede apresentou falhas durante testes de carga. Substituída por peça nova com garantia de 90 dias.</p>
+          </div>
+        </section>
+        
+        <section class="order-section signature">
+          <div class="signature-box">
+            <p>Responsável Técnico</p>
+            <div class="signature-line"></div>
+            <p class="signature-name">Carlos Oliveira</p>
+            <p class="signature-crea">CREA/SP 123456</p>
+          </div>
+          
+          <div class="signature-box">
+            <p>Cliente</p>
+            <div class="signature-line"></div>
+            <p class="signature-name">João da Silva</p>
+            <p class="signature-role">Gerente de TI</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
 </html>

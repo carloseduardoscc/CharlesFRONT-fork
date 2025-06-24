@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles² - Abrir Chamado</title>
+  <link rel="stylesheet" href="css/open-ticket.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+        <span class="material-icons">arrow_back</span>Voltar
+      </a>
+    </div>
+    <div class="header-right">
+      <span class="material-icons">help</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <h1>Abrir Novo Chamado</h1>
+      
+      <form class="ticket-form">
+        <div class="form-section">
+          <h2><span class="material-icons">info</span> Informações Básicas</h2>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ticket-title">Título do Chamado*</label>
+              <input type="text" id="ticket-title" placeholder="Descreva brevemente o problema" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="ticket-department">Departamento*</label>
+              <select id="ticket-department" required>
+                <option value="">Selecione um departamento...</option>
+                <option>TI</option>
+                <option>Financeiro</option>
+                <option>RH</option>
+                <option>Operações</option>
+                <option>Comercial</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ticket-category">Categoria*</label>
+              <select id="ticket-category" required>
+                <option value="">Selecione uma categoria...</option>
+                <option>Problema com Sistema</option>
+                <option>Solicitação de Acesso</option>
+                <option>Falha de Hardware</option>
+                <option>Dúvida/Consulta</option>
+                <option>Outros</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="ticket-priority">Prioridade*</label>
+              <select id="ticket-priority" required>
+                <option value="">Selecione a prioridade...</option>
+                <option value="low">Baixa</option>
+                <option value="medium">Média</option>
+                <option value="high">Alta</option>
+                <option value="critical">Crítica</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-section">
+          <h2><span class="material-icons">description</span> Descrição Detalhada</h2>
+          
+          <div class="form-group">
+            <label for="ticket-description">Descreva o problema ou solicitação*</label>
+            <textarea id="ticket-description" rows="6" placeholder="Forneça o máximo de detalhes possível para ajudar na resolução..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="ticket-attachments">Anexos</label>
+            <div class="file-upload">
+              <input type="file" id="ticket-attachments" multiple>
+              <label for="ticket-attachments" class="upload-btn">
+                <span class="material-icons">attach_file</span> Selecionar Arquivos
+              </label>
+              <span class="file-info">Nenhum arquivo selecionado</span>
+            </div>
+            <small>Formatos aceitos: .jpg, .png, .pdf, .doc, .xls (Máx. 5MB cada)</small>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn cancel-btn">Cancelar</button>
+          <button type="submit" class="btn submit-btn">Abrir Chamado</button>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    // Script para mostrar o nome dos arquivos selecionados
+    document.getElementById('ticket-attachments').addEventListener('change', function(e) {
+      const files = e.target.files;
+      const fileInfo = document.querySelector('.file-info');
+      
+      if(files.length === 0) {
+        fileInfo.textContent = 'Nenhum arquivo selecionado';
+      } else if(files.length === 1) {
+        fileInfo.textContent = files[0].name;
+      } else {
+        fileInfo.textContent = `${files.length} arquivos selecionados`;
+      }
+    });
+  </script>
+</body>
+</html>

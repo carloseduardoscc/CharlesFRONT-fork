@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles² - Banco de Dados</title>
+  <link rel="stylesheet" href="css/database.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+        <span class="material-icons">arrow_back</span>Voltar
+      </a>
+    </div>
+    <div class="header-right">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input type="text" placeholder="Pesquisar usuários...">
+      </div>
+      <span class="material-icons">filter_list</span>
+      <span class="material-icons">refresh</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="database-header">
+        <h1>Banco de Dados de Usuários</h1>
+        <button class="btn add-user">
+          <span class="material-icons">person_add</span> Adicionar Usuário
+        </button>
+      </div>
+      
+      <div class="database-controls">
+        <div class="controls-left">
+          <div class="entries-select">
+            <span>Mostrar</span>
+            <select>
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+              <option>100</option>
+            </select>
+            <span>entradas</span>
+          </div>
+        </div>
+        
+        <div class="controls-right">
+          <button class="btn export-btn">
+            <span class="material-icons">download</span> Exportar
+          </button>
+        </div>
+      </div>
+      
+      <div class="database-table-container">
+        <table class="database-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Departamento</th>
+              <th>Perfil</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Carlos Silva</td>
+              <td>carlos@empresa.com</td>
+              <td>TI</td>
+              <td><span class="badge owner">Owner</span></td>
+              <td><span class="status active">Ativo</span></td>
+              <td class="actions">
+                <span class="material-icons" title="Editar">edit</span>
+                <span class="material-icons" title="Desativar">toggle_on</span>
+              </td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Ana Paula</td>
+              <td>ana@empresa.com</td>
+              <td>TI</td>
+              <td><span class="badge admin">Admin</span></td>
+              <td><span class="status active">Ativo</span></td>
+              <td class="actions">
+                <span class="material-icons" title="Editar">edit</span>
+                <span class="material-icons" title="Desativar">toggle_on</span>
+                </td>
+            </tr>
+            <!-- Adicione mais linhas para os usuários do banco de dados -->            
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

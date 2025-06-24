@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles² - Relatórios</title>
+  <link rel="stylesheet" href="css/reports.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+        <span class="material-icons">arrow_back</span>Voltar
+      </a>
+    </div>
+    <div class="header-right">
+      <span class="material-icons">download</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <h1>Relatórios</h1>
+      
+      <div class="filters">
+        <div class="filter-group">
+          <label for="report-type">Tipo de Relatório</label>
+          <select id="report-type">
+            <option>Chamados por Status</option>
+            <option>Chamados por Departamento</option>
+            <option>Chamados por Responsável</option>
+            <option>Todos os Chamados</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label for="date-from">De</label>
+          <input type="date" id="date-from">
+        </div>
+        
+        <div class="filter-group">
+          <label for="date-to">Até</label>
+          <input type="date" id="date-to">
+        </div>
+        
+        <button class="btn">Gerar Relatório</button>
+      </div>
+      
+      <div class="report-container">
+        <div class="report-header">
+          <h2>Relatório de Chamados</h2>
+          <p>Período: 01/01/2023 a 31/12/2023</p>
+        </div>
+        
+        <div class="report-summary">
+          <div class="summary-item">
+            <h3>Total de Chamados</h3>
+            <p>124</p>
+          </div>
+          
+          <div class="summary-item">
+            <h3>Abertos</h3>
+            <p>15</p>
+          </div>
+          
+          <div class="summary-item">
+            <h3>Em Andamento</h3>
+            <p>23</p>
+          </div>
+          
+          <div class="summary-item">
+            <h3>Fechados</h3>
+            <p>86</p>
+          </div>
+        </div>
+        
+        <div class="chart-placeholder">
+          <span class="material-icons">bar_chart</span>
+          <p>Gráfico do relatório será exibido aqui</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

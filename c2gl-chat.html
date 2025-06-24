@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charles² - C-2GL Chat</title>
+  <link rel="stylesheet" href="css/c2gl-chat.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
+        <span class="material-icons">arrow_back</span>Voltar
+      </a>
+    </div>
+    <div class="header-right">
+      <span class="material-icons">info</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <main class="main-content">
+      <div class="chat-header">
+        <div class="chat-title">
+          <div class="chat-icon">
+            <span class="material-icons">smart_toy</span>
+          </div>
+          <h1>C-2GL Assistant</h1>
+        </div>
+        <p>Sistema Inteligente de Suporte</p>
+      </div>
+      
+      <div class="chat-container">
+        <div class="chat-messages">
+          <!-- Mensagem do Bot -->
+          <div class="message bot-message">
+            <div class="message-avatar">
+              <span class="material-icons">smart_toy</span>
+            </div>
+            <div class="message-content">
+              <div class="message-text">
+                Olá! Sou o C-2GL, assistente virtual do sistema Charles². Como posso te ajudar hoje?
+              </div>
+              <div class="message-time">10:30 AM</div>
+            </div>
+          </div>
+          
+          <!-- Mensagem do Usuário -->
+          <div class="message user-message">
+            <div class="message-content">
+              <div class="message-text">
+                Preciso de ajuda para abrir um chamado no sistema.
+              </div>
+              <div class="message-time">10:32 AM</div>
+            </div>
+          </div>
+          
+          <!-- Mensagem do Bot -->
+          <div class="message bot-message">
+            <div class="message-avatar">
+              <span class="material-icons">smart_toy</span>
+            </div>
+            <div class="message-content">
+              <div class="message-text">
+                Claro! Posso te guiar no processo. Qual é o departamento relacionado ao seu problema?
+              </div>
+              <div class="quick-replies">
+                <button class="quick-reply">TI</button>
+                <button class="quick-reply">Financeiro</button>
+                <button class="quick-reply">RH</button>
+                <button class="quick-reply">Outro</button>
+              </div>
+              <div class="message-time">10:32 AM</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chat-input">
+          <input type="text" placeholder="Digite sua mensagem...">
+          <button class="send-btn">
+            <span class="material-icons">send</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
