@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Charles Help Desk</title>
+    
+    <link rel="stylesheet" href="css/style.css"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <span class="material-icons menu-icon">menu</span>
+            <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
+        </div>
+        <div class="header-right">
+            <span class="material-icons notifications-icon">notifications</span>
+            <div class="user-profile">
+                <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
+                <span>John Owner</span> 
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html"><span class="material-icons">dashboard</span>Dashboard</a></li>
+                    <li><a href="tickets-and-transfer.html"><span class="material-icons">swap_horiz</span>Tickets & Transferência</a></li>
+                    <li><a href="service-orders.html"><span class="material-icons">build</span>Ordens de Serviço</a></li>
+                    <li><a href="#"><span class="material-icons">support_agent</span>Meus Chamados</a></li>
+                    <li><a href="#" class="open-new-call-sidebar"><span class="material-icons">add_circle_outline</span>Abrir Chamado</a></li>
+                    <li><a href="#"><span class="material-icons">library_books</span>Base de Conhecimento</a></li>
+                    <li><a href="#"><span class="material-icons">bar_chart</span>Relatórios de Chamados</a></li>
+                    <li class="active"><a href="settings.html"><span class="material-icons">settings</span>Configurações</a></li> <li><a href="#"><span class="material-icons">logout</span>Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="settings-header">
+                <h2>Configurações</h2>
+                <p>Personalize sua experiência Charles Help Desk</p>
+            </section>
+
+            <div class="settings-grid">
+                <div class="settings-card theme-settings">
+                    <h3>Tema</h3>
+                    <div class="theme-options">
+                        <div class="theme-option selected" data-theme="dark">
+                            <div class="theme-color-box dark-theme-box"></div>
+                            <div class="theme-info">
+                                <h4>Dark Theme</h4>
+                                <p>Charles default dark theme</p>
+                            </div>
+                            <span class="material-icons check-icon">check_circle</span>
+                        </div>
+                        <div class="theme-option" data-theme="light">
+                            <div class="theme-color-box light-theme-box"></div>
+                            <div class="theme-info">
+                                <h4>Light Theme</h4>
+                                <p>Bright theme with green accents</p>
+                            </div>
+                            <span class="material-icons check-icon">check_circle</span>
+                        </div>
+                        <div class="theme-option" data-theme="senac">
+                            <div class="theme-color-box senac-theme-box">
+                                <img src="Images/senac_logo.png" alt="SENAC Logo" class="senac-logo"> 
+                            </div>
+                            <div class="theme-info">
+                                <h4>SENAC Theme</h4>
+                                <p>Orange and blue SENAC 80th anniversary theme</p>
+                            </div>
+                            <span class="material-icons check-icon">check_circle</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card language-settings">
+                    <h3>Idioma</h3>
+                    <div class="form-group">
+                        <span class="material-icons language-icon">language</span>
+                        <label for="languageSelect">Selecione seu idioma preferido</label>
+                        <select id="languageSelect" class="browser-default">
+                            <option value="pt-BR" selected>Português (Brasil)</option>
+                            <option value="en-US">English (US)</option>
+                            <option value="es-ES">Español (ES)</option>
+                        </select>
+                        </div>
+                </div>
+
+                <div class="settings-card notifications-settings">
+                    <h3>Notificações</h3>
+                    <div class="notification-toggle">
+                        <p>Receba notificações para ticket updates, service order status changes, and system announcements.</p>
+                        <div class="switch">
+                            <label>
+                                Off
+                                <input type="checkbox" id="notificationToggle" checked>
+                                <span class="lever"></span>
+                                On
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-card display-settings">
+                    <h3>Display</h3>
+                    <div class="display-options">
+                        <button class="btn display-option" data-size="compact">Compact</button>
+                        <button class="btn display-option selected" data-size="default">Default</button>
+                        <button class="btn display-option" data-size="large">Large</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="newCallModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-button material-icons">close</span>
+            <h2>NOVO TICKET</h2>
+            <form id="newCallForm">
+                <div class="form-group">
+                    <label for="callerName">Nome:</label>
+                    <input type="text" id="callerName" name="callerName" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="callDate">Data:</label>
+                    <input type="text" id="callDate" name="callDate" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="department">Departamento:</label>
+                    <select id="department" name="department" required>
+                        <option value="">Selecione um departamento</option>
+                        <option value="TI">TI</option>
+                        <option value="RH">Recursos Humanos</option>
+                        <option value="Financeiro">Financeiro</option>
+                        <option value="Comercial">Comercial</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="responsible">Responsável:</label>
+                    <input type="text" id="responsible" name="responsible" placeholder="Nome do responsável" required>
+                </div>
+                <div class="form-group">
+                    <label for="urgencyLevel">Nível de Urgência:</label>
+                    <select id="urgencyLevel" name="urgencyLevel" required>
+                        <option value="">Selecione a urgência</option>
+                        <option value="Baixa">Baixa</option>
+                        <option value="Média">Média</option>
+                        <option value="Alta">Alta</option>
+                        <option value="Urgente">Urgente</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="callReason">Motivo do Chamado:</label>
+                    <textarea id="callReason" name="callReason" rows="4" placeholder="Descreva o motivo do seu chamado..." required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn confirm-btn">Confirmar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script src="javascript/settings.js"></script> 
+    <script src="javascript/tickets-and-transfer.js"></script> </body>
+</html>

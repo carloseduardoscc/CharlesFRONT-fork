@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tickets & Transferência - Charles Help Desk</title>
+    <title>Ordens de Serviço - Charles Help Desk</title>
     
-    <link rel="stylesheet" href="css/tickets-and-transfer.css"> 
+    <link rel="stylesheet" href="css/service-orders.css"> 
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-   <header class="header">
+    <header class="header">
         <div class="header-left">
             <span class="material-icons menu-icon">menu</span>
             <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
@@ -23,62 +23,70 @@
             <span class="material-icons notifications-icon">notifications</span>
             <div class="user-profile">
                 <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
-                <span>Usuário Suporte</span>
+                <span>John Owner</span> 
             </div>
         </div>
     </header>
 
-  
+    <div class="container">
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html"><span class="material-icons">dashboard</span>Dashboard</a></li>
+                    <li><a href="tickets-and-transfer.html"><span class="material-icons">swap_horiz</span>Tickets & Transferência</a></li>
+                    <li class="active"><a href="service-orders.html"><span class="material-icons">build</span>Ordens de Serviço</a></li> <li><a href="#"><span class="material-icons">support_agent</span>Meus Chamados</a></li>
+                    <li><a href="#" class="open-new-call-sidebar"><span class="material-icons">add_circle_outline</span>Abrir Chamado</a></li>
+                    <li><a href="#"><span class="material-icons">library_books</span>Base de Conhecimento</a></li>
+                    <li><a href="#"><span class="material-icons">bar_chart</span>Relatórios de Chamados</a></li>
+                    <li><a href="#"><span class="material-icons">settings</span>Configurações</a></li>
+                    <li><a href="#"><span class="material-icons">logout</span>Sair</a></li>
+                </ul>
+            </nav>
+        </aside>
 
         <main class="main-content">
-            <section class="tickets-header">
-                <div class="tickets-header-top">
+            <section class="service-orders-header">
+                <div class="service-orders-header-top">
                     <div>
-                        <h2>Tickets & Transferência</h2>
-                        <p>Gerencie e acompanhe os tickets de suporte</p>
+                        <h2>Ordens de Serviço</h2>
+                        <p>Gerencie e acompanhe as ordens de serviço</p>
                     </div>
-                    <button class="btn new-ticket-btn">
-                        <span class="material-icons">add</span>Novo Ticket
-                    </button>
-                </div>
+                    </div>
 
-                <div class="tickets-filters">
+                <div class="service-orders-filters">
                     <div class="search-box">
                         <span class="material-icons">search</span>
-                        <input type="text" id="ticketSearch" placeholder="Pesquisar por número do ticket, solicitante ou descrição...">
+                        <input type="text" id="serviceOrderSearch" placeholder="Pesquisar por número da ordem ou descrição...">
                     </div>
                     <div class="status-filter">
-                        <select id="statusFilter">
+                        <select id="serviceOrderStatusFilter">
                             <option value="All">Todos os Status</option>
-                            <option value="Aberto">Aberto</option>
-                            <option value="Em Andamento">Em Andamento</option>
-                            <option value="Fechado">Fechado</option>
-                            <option value="Atribuído">Atribuído</option>
-                            <option value="Concluído">Concluído</option>
-                        </select>
+                            <option value="OPEN">OPEN</option>
+                            <option value="ASSIGNED">ASSIGNED</option>
+                            <option value="COMPLETED">COMPLETED</option>
+                            </select>
                         <span class="material-icons arrow-down">arrow_drop_down</span>
                     </div>
                 </div>
             </section>
 
-            <section class="tickets-table-section">
-                <table class="tickets-table">
+            <section class="service-orders-table-section">
+                <table class="service-orders-table">
                     <thead>
                         <tr>
+                            <th>Order #</th>
                             <th>Ticket #</th>
-                            <th>Solicitante</th>
-                            <th>Departamento</th>
-                            <th>Tipo</th>
-                            <th>Prioridade</th>
-                            <th>Criado em</th>
+                            <th>Requester</th>
+                            <th>Supporter</th>
+                            <th>Created</th>
                             <th>Status</th>
-                            <th>Ações</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="ticketsTableBody">
+                    <tbody id="serviceOrdersTableBody">
                         </tbody>
                 </table>
-                <p id="noTicketsMessage" style="text-align: center; color: var(--secondary-text); padding: 20px; display: none;">Nenhum ticket encontrado.</p>
+                <p id="noServiceOrdersMessage" style="text-align: center; color: var(--secondary-text); padding: 20px; display: none;">Nenhuma ordem de serviço encontrada.</p>
             </section>
         </main>
     </div>
@@ -86,10 +94,10 @@
     <div id="newCallModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-button material-icons">close</span>
-            <h2>NOVO TICKET</h2>
+            <h2>NOVA ORDEM DE SERVIÇO</h2>
             <form id="newCallForm">
                 <div class="form-group">
-                    <label for="callerName">Nome:</label>
+                    <label for="callerName">Solicitante:</label>
                     <input type="text" id="callerName" name="callerName" readonly>
                 </div>
                 <div class="form-group">
@@ -108,13 +116,13 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="responsible">Responsável:</label>
+                    <label for="responsible">Suporte Responsável:</label>
                     <input type="text" id="responsible" name="responsible" placeholder="Nome do responsável" required>
                 </div>
                 <div class="form-group">
-                    <label for="urgencyLevel">Nível de Urgência:</label>
+                    <label for="urgencyLevel">Prioridade:</label>
                     <select id="urgencyLevel" name="urgencyLevel" required>
-                        <option value="">Selecione a urgência</option>
+                        <option value="">Selecione a prioridade</option>
                         <option value="Baixa">Baixa</option>
                         <option value="Média">Média</option>
                         <option value="Alta">Alta</option>
@@ -122,8 +130,8 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="callReason">Motivo do Chamado:</label>
-                    <textarea id="callReason" name="callReason" rows="4" placeholder="Descreva o motivo do seu chamado..." required></textarea>
+                    <label for="callReason">Descrição da Ordem de Serviço:</label>
+                    <textarea id="callReason" name="callReason" rows="4" placeholder="Descreva a ordem de serviço..." required></textarea>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="btn cancel-btn">Cancelar</button>
@@ -132,13 +140,9 @@
             </form>
         </div>
     </div>
-
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
-    <script src="javascript/tickets-and-transfer.js"></script>
-</body>
+    <script src="script.js"></script> 
+    <script src="service-orders.js"></script> </body>
 </html>
