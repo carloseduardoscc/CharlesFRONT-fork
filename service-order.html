@@ -1,132 +1,415 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Charles² - Ordem de Serviço</title>
-  <link rel="stylesheet" href="css/service-order.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Chamados Abertos</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #2c2c2c; /* Cor de fundo escura */
+            color: #e0e0e0; /* Cor do texto padrão */
+        }
+
+        .header {
+            background-color: #2e8b57; /* Verde mar escuro para o cabeçalho */
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header .back-button {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .header .back-button .material-icons {
+            margin-right: 5px;
+        }
+
+        .header .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #4CAF50; /* Verde mais claro para a barra de pesquisa */
+            border-radius: 5px;
+            padding: 5px 10px;
+        }
+
+        .header .search-bar input {
+            background: none;
+            border: none;
+            color: white;
+            padding: 5px;
+            outline: none;
+        }
+
+        .header .search-bar input::placeholder {
+            color: #e0e0e0;
+        }
+
+        .header .search-bar .material-icons {
+            color: white;
+            margin-right: 5px;
+        }
+
+        .header .search-controls .material-icons {
+            color: white;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .page-title {
+            color: #4CAF50; /* Verde para o título da página */
+            font-size: 28px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title .add-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .page-title .add-button .material-icons {
+            margin-right: 5px;
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .controls-row .show-entries {
+            display: flex;
+            align-items: center;
+            color: #e0e0e0;
+        }
+
+        .controls-row .show-entries select {
+            background-color: #444;
+            color: white;
+            border: 1px solid #555;
+            padding: 5px;
+            border-radius: 3px;
+            margin-left: 5px;
+        }
+
+        .controls-row .export-button {
+            background-color: #444;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #3c3c3c; /* Fundo da tabela um pouco mais claro */
+            border-radius: 8px;
+            overflow: hidden; /* Garante que o border-radius seja aplicado às bordas internas */
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+        }
+
+        th {
+            background-color: #2e8b57; /* Cabeçalho da tabela igual ao cabeçalho da página */
+            color: white;
+            font-weight: normal;
+        }
+
+        tr:nth-child(even) {
+            background-color: #353535; /* Fundo para linhas pares */
+        }
+
+        tr:hover {
+            background-color: #4a4a4a; /* Efeito hover nas linhas */
+        }
+
+        .status-button {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .status-button.ativo {
+            background-color: #4CAF50; /* Verde para "Ativo" */
+        }
+
+        .profile-tag {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: white;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .profile-tag.owner {
+            background-color: #d35400; /* Laranja para "Owner" */
+        }
+
+        .profile-tag.admin {
+            background-color: #2980b9; /* Azul para "Admin" */
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions .material-icons {
+            color: #9e9e9e;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-  <header class="header">
-    <div class="header-left">
-      <a href="Home.html" style="color: white; text-decoration: none; display: flex; align-items: center;">
-        <span class="material-icons">arrow_back</span>Voltar
-      </a>
-    </div>
-    <div class="header-right">
-      <span class="material-icons">print</span>
-      <span class="material-icons">save</span>
-    </div>
-  </header>
-
-  <div class="container">
-    <main class="main-content">
-      <div class="service-order-header">
-        <h1>Ordem de Serviço</h1>
-        <div class="order-info">
-          <span><strong>Nº OS:</strong> 2023-OS-00158</span>
-          <span><strong>Data:</strong> 15/11/2023</span>
-          <span><strong>Status:</strong> <span class="status in-progress">Em Andamento</span></span>
+    <div class="header">
+        <a href="#" class="back-button">
+            <span class="material-icons">arrow_back</span> Voltar
+        </a>
+        <div class="search-bar">
+            <span class="material-icons">search</span>
+            <input type="text" placeholder="Pesquisar chamados...">
+            <span class="material-icons search-controls">filter_list</span>
+            <span class="material-icons search-controls">refresh</span>
         </div>
-      </div>
-      
-      <div class="order-sections">
-        <section class="order-section client-info">
-          <h2><span class="material-icons">person</span> Informações do Cliente</h2>
-          <div class="info-grid">
-            <div>
-              <label>Nome:</label>
-              <p>Empresa XYZ Ltda</p>
+    </div>
+
+    <div class="content">
+        <div class="page-title">
+            Lista de Chamados Abertos
+            <a href="#" class="add-button">
+                <span class="material-icons">add_circle_outline</span> Novo Chamado
+            </a>
+        </div>
+
+        <div class="controls-row">
+            <div class="show-entries">
+                Mostrar
+                <select>
+                    <option value="10">10</option>
+                    <option value="15" selected>15</option>
+                    <option value="20">20</option>
+                </select>
+                entradas
             </div>
-            <div>
-              <label>Responsável:</label>
-              <p>João da Silva</p>
-            </div>
-            <div>
-              <label>Telefone:</label>
-              <p>(11) 99999-9999</p>
-            </div>
-            <div>
-              <label>Email:</label>
-              <p>contato@empresaxyz.com.br</p>
-            </div>
-          </div>
-        </section>
-        
-        <section class="order-section service-info">
-          <h2><span class="material-icons">build</span> Detalhes do Serviço</h2>
-          <div class="info-grid">
-            <div>
-              <label>Tipo de Serviço:</label>
-              <p>Manutenção Corretiva</p>
-            </div>
-            <div>
-              <label>Equipamento:</label>
-              <p>Servidor HP DL380</p>
-            </div>
-            <div>
-              <label>Prioridade:</label>
-              <p class="priority high">Alta</p>
-            </div>
-            <div>
-              <label>Previsão:</label>
-              <p>20/11/2023</p>
-            </div>
-          </div>
-          
-          <div class="problem-description">
-            <label>Descrição do Problema:</label>
-            <p>Servidor apresentando falhas intermitentes de conexão com o storage. Eventos de timeout registrados no log do sistema. Necessário diagnóstico completo e substituição de possíveis componentes defeituosos.</p>
-          </div>
-        </section>
-        
-        <section class="order-section execution-info">
-          <h2><span class="material-icons">assignment</span> Execução do Serviço</h2>
-          <div class="info-grid">
-            <div>
-              <label>Técnico Responsável:</label>
-              <p>Carlos Oliveira</p>
-            </div>
-            <div>
-              <label>Data de Início:</label>
-              <p>16/11/2023 09:30</p>
-            </div>
-          </div>
-          
-          <div class="service-steps">
-            <label>Etapas do Serviço:</label>
-            <ol>
-              <li>Diagnóstico inicial do hardware</li>
-              <li>Teste dos componentes de rede</li>
-              <li>Substituição da placa de rede</li>
-              <li>Testes de stress do sistema</li>
-            </ol>
-          </div>
-          
-          <div class="observations">
-            <label>Observações:</label>
-            <p>Placa de rede apresentou falhas durante testes de carga. Substituída por peça nova com garantia de 90 dias.</p>
-          </div>
-        </section>
-        
-        <section class="order-section signature">
-          <div class="signature-box">
-            <p>Responsável Técnico</p>
-            <div class="signature-line"></div>
-            <p class="signature-name">Carlos Oliveira</p>
-            <p class="signature-crea">CREA/SP 123456</p>
-          </div>
-          
-          <div class="signature-box">
-            <p>Cliente</p>
-            <div class="signature-line"></div>
-            <p class="signature-name">João da Silva</p>
-            <p class="signature-role">Gerente de TI</p>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
+            <button class="export-button">
+                <span class="material-icons">download</span> Exportar
+            </button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Numero da OS</th>
+                    <th>Nome do Requisitante</th>
+                    <th>Nome do Responsável</th>  
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>OS-2024-001</td>
+                    <td>Ana Paula Mendes</td>
+                    <td>Carlos Eduardo de Souza Coelho Cavaletto</td>
+                    <td><span class="status-button ativo">Ativo</span></td>
+                    <td class="actions">
+                        <span class="material-icons">edit</span>
+                        <span class="material-icons">toggle_on</span>
+                        <span class="material-icons">cancel</span>
+                        <span class="material-icons">transfer_within_a_station</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>OS-2024-002</td>
+                    <td>Carlos Roberto Silva</td>
+                    <td>Carlos Eduardo de Souza Coelho Cavaletto</td>
+                    <td><span class="status-button andamento">Em Andamento</span></td>
+                    <td class="actions">
+                        <span class="material-icons">edit</span>
+                        <span class="material-icons">toggle_on</span>
+                        <span class="material-icons">cancel</span>
+                        <span class="material-icons">transfer_within_a_station</span>
+                    </td>
+                    <td>
+                </tr>
+                <tr>
+                    <td>OS-2024-003</td>
+                    <td>Fernanda Lima</td>
+                    <td>Carlos Eduardo de Souza Coelho Cavaletto</td>
+                    <td><span class="status-button finalizado">Finalizado</span></td>
+                    <td class="actions">
+                        <span class="material-icons">edit</span>
+                        <span class="material-icons">toggle_on</span>
+                        <span class="material-icons">cancel</span>
+                        <span class="material-icons">transfer_within_a_station</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>OS-2024-004</td>
+                    <td>João da Silva</td>
+                    <td>Carlos Eduardo de Souza Coelho Cavaletto</td>
+                    <td><span class="status-button cancelado">Cancelado</span></td>
+                    <td class="actions">
+                        <span class="material-icons">edit</span>
+                        <span class="material-icons">toggle_on</span>
+                        <span class="material-icons">cancel</span>
+                        <span class="material-icons">transfer_within_a_station</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>OS-2024-005</td>
+                    <td>Maria Clara Santos</td>
+                    <td>Carlos Eduardo de Souza Coelho Cavaletto</td>
+                    <td><span class="status-button ativo">Ativo</span></td>
+                    <td class="actions">
+                        <span class="material-icons">edit</span>
+                        <span class="material-icons">toggle_on</span>
+                        <span class="material-icons">cancel</span>
+                        <span class="material-icons">transfer_within_a_station</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
+<script>
+    document.querySelector('.export-button').addEventListener('click', function() {
+        alert('Exportando dados...');
+    });
+</script>
+<script>
+    document.querySelector('.search-controls').addEventListener('click', function() {
+        alert('Filtros aplicados!');
+    });
+
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.history.back();
+    });
+</script>
+<script>
+    document.querySelectorAll('.actions .material-icons').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const action = this.textContent.trim();
+            switch (action) {
+                case 'edit':
+                    alert('Editando chamado...');
+                    break;
+                case 'toggle_on':
+                    alert('Alterando status do chamado...');
+                    break;
+                case 'cancel':
+                    alert('Cancelando chamado...');
+                    break;
+                case 'transfer_within_a_station':
+                    alert('Transferindo chamado...');
+                    break;
+            }
+        });
+    });
+</script>
+<script>
+    document.querySelector('.add-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = 'open-ticket.html'; // Redireciona para a página de abertura de chamado
+    });
+</script>
+<script>
+    document.querySelector('.search-bar input').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const cells = row.querySelectorAll('td');
+            const match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(searchTerm));
+            row.style.display = match ? '' : 'none';
+        });
+    });
+</script>
+<script>
+    document.querySelector('.show-entries select').addEventListener('change', function() {
+        const entries = parseInt(this.value);
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach((row, index) => {
+            row.style.display = (index < entries) ? '' : 'none';
+        });
+    });
+</script>
+<script>    
+    document.querySelector('.show-entries select').addEventListener('change', function() {
+        const entries = parseInt(this.value);
+        const rows = document.querySelectorAll('tbody tr');
+        rows.forEach((row, index) => {
+            row.style.display = (index < entries) ? '' : 'none';
+        });
+    });
+    document.querySelector('.export-button').addEventListener('click', function() {
+        alert('Exportando dados...');
+    }); 
+    document.querySelector('.search-controls').addEventListener('click', function() {
+        alert('Filtros aplicados!');
+    });
+    document.querySelector('.back-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.history.back();
+    });
+    document.querySelectorAll('.actions .material-icons').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const action = this.textContent.trim();
+            switch (action) {
+                case 'edit':
+                    alert('Editando chamado...');
+                    break;
+                case 'toggle_on':
+                    alert('Alterando status do chamado...');
+                    break;
+                case 'cancel':
+                    alert('Cancelando chamado...');
+                    break;
+                case 'transfer_within_a_station':
+                    alert('Transferindo chamado...');
+                    break;
+            }
+        });
+    });
+    document.querySelector('.add-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        window.location.href = 'open-ticket.html'; // Redireciona para a página de abertura de chamado
+    });

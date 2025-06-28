@@ -23,54 +23,7 @@
     <main class="main-content">
       <h1>Abrir Novo Chamado</h1>
       
-      <form class="ticket-form">
-        <div class="form-section">
-          <h2><span class="material-icons">info</span> Informações Básicas</h2>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ticket-title">Título do Chamado*</label>
-              <input type="text" id="ticket-title" placeholder="Descreva brevemente o problema" required>
-            </div>
-            
-            <div class="form-group">
-              <label for="ticket-department">Departamento*</label>
-              <select id="ticket-department" required>
-                <option value="">Selecione um departamento...</option>
-                <option>TI</option>
-                <option>Financeiro</option>
-                <option>RH</option>
-                <option>Operações</option>
-                <option>Comercial</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="ticket-category">Categoria*</label>
-              <select id="ticket-category" required>
-                <option value="">Selecione uma categoria...</option>
-                <option>Problema com Sistema</option>
-                <option>Solicitação de Acesso</option>
-                <option>Falha de Hardware</option>
-                <option>Dúvida/Consulta</option>
-                <option>Outros</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="ticket-priority">Prioridade*</label>
-              <select id="ticket-priority" required>
-                <option value="">Selecione a prioridade...</option>
-                <option value="low">Baixa</option>
-                <option value="medium">Média</option>
-                <option value="high">Alta</option>
-                <option value="critical">Crítica</option>
-              </select>
-            </div>
-          </div>
-        </div>
+      
         
         <div class="form-section">
           <h2><span class="material-icons">description</span> Descrição Detalhada</h2>
@@ -79,19 +32,6 @@
             <label for="ticket-description">Descreva o problema ou solicitação*</label>
             <textarea id="ticket-description" rows="6" placeholder="Forneça o máximo de detalhes possível para ajudar na resolução..." required></textarea>
           </div>
-          
-          <div class="form-group">
-            <label for="ticket-attachments">Anexos</label>
-            <div class="file-upload">
-              <input type="file" id="ticket-attachments" multiple>
-              <label for="ticket-attachments" class="upload-btn">
-                <span class="material-icons">attach_file</span> Selecionar Arquivos
-              </label>
-              <span class="file-info">Nenhum arquivo selecionado</span>
-            </div>
-            <small>Formatos aceitos: .jpg, .png, .pdf, .doc, .xls (Máx. 5MB cada)</small>
-          </div>
-        </div>
         
         <div class="form-actions">
           <button type="button" class="btn cancel-btn">Cancelar</button>

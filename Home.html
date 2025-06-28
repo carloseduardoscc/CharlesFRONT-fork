@@ -12,12 +12,12 @@
     <header class="header">
         <div class="header-left">
             <span class="material-icons menu-icon">menu</span>
-            <img src="Images/Charles2-removebg-preview.png" width="150" height="150" alt="Logo" class="logo">
+            <img src="Images/Charles2-removebg-preview.png" alt="Logo Charles" class="logo">
         </div>
         <div class="header-right">
             <span class="material-icons notifications-icon">notifications</span>
             <div class="user-profile">
-                <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
+                <img src="https://via.placeholder.com/40" alt="Avatar do Usuário" class="avatar">
                 <span>Usuário Suporte</span>
             </div>
         </div>
@@ -51,16 +51,58 @@
             <section class="dashboard-overview">
                 <div class="card calls-card">
                     <h3>Chamados Abertos</h3>
-                    <p class="calls-count">...</p> 
-                    <button class="btn open-new-call">+ New Ticket</button>
+                    <p class="calls-count">15</p>
+                    <button class="btn open-new-call" onclick="location.href='open-ticket.html'">+ Abrir Novo Chamado</button>
                 </div>
+                <div class="card tickets-card">
+                    <h3>Tickets Pendentes</h3>
+                    <p class="tickets-count">8</p>
+                    <button class="btn view-tickets" onclick="location.href='ticket-transfer.html'">Ver Tickets</button>
+                </div>
+                <div class="card orders-card">
+                    <h3>Ordens de Serviço</h3>
+                    <p class="orders-count">5</p>
+                    <button class="btn view-orders" onclick="location.href='service-order.html'">Ver Ordens</button>
+                </div>
+                <div class="card database-card">
+                    <h3>Banco de Dados</h3>
+                    <p class="database-count">3</p>
+                    <button class="btn view-database" onclick="location.href='database.html'">Ver Banco de Dados</button>
+                </div>
+                
+            </section>
 
-                </section>
+            <section class="quick-links-section">
+                <h3>Acessos Rápidos</h3>
+                <div class="quick-links-grid">
+                    <a href="open-ticket.html" class="quick-link-card">
+                        <span class="material-icons">add_circle_outline</span>
+                        <p>Abrir Chamado</p>
+                    </a>
+                    <a href="service-order.html" class="quick-link-card">
+                        <span class="material-icons">support_agent</span>
+                        <p>Ordens de Serviço</p>
+                    </a>
+                    <a href="database.html" class="quick-link-card">
+                        <span class="material-icons">library_books</span>
+                        <p>Banco de Dados</p>
+                    </a>
+                    <a href="reports.html" class="quick-link-card">
+                        <span class="material-icons">bar_chart</span>
+                        <p>Relatórios</p>
+                    </a>
+                    <a href="c2gl-chat.html" class="quick-link-card">
+                        <span class="material-icons">chat</span>
+                        <p>C-2GL</p>
+                    </a>
+                    
+                </div>
+            </section>
 
             <section class="recent-calls-section">
                 <h3>Chamados Recentes</h3>
                 <div class="calls-filter">
-                    <input type="date" value="2025-06-07">
+                    <input type="date" value="2025-06-25">
                     <select>
                         <option>Todos</option>
                         <option>Aberto</option>
@@ -69,8 +111,85 @@
                     </select>
                 </div>
                 <ul class="calls-list">
-                    </ul>
-                <button class="btn view-all-calls">Ver todos os Chamados</button>
+                    <li>
+                        <span>OS-2024-001 - Problema de Rede</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-002 - Solicitação de Software</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-003 - Manutenção de Impressora</span>
+                        <span class="status closed">Fechado</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-004 - Configuração de Email</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-005 - Upgrade de Hardware</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-006 - Treinamento de Sistema</span>
+                        <span class="status closed">Fechado</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-007 - Nova Instalação</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-008 - Suporte Remoto</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-009 - Verificação de Segurança</span>
+                        <span class="status closed">Fechado</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-010 - Problema com Telefone IP</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-011 - Migração de Dados</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-012 - Solicitação de Acesso</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-013 - Falha de Energia</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-014 - Consulta de Banco de Dados</span>
+                        <span class="status open">Aberto</span>
+                    </li>
+                    <li>
+                        <span>OS-2024-015 - Reparo em Servidor</span>
+                        <span class="status in-progress">Em Andamento</span>
+                    </li>
+                </ul>
+                <button class="btn view-all-calls" onclick="location.href='service-order.html'">Ver todos os Chamados</button>
+            </section>
+
+            <section class="instagram-section">
+                <h3>Instagram da Charles</h3>
+                <div class="instagram-feed">
+                    <a href="https://www.instagram.com/charles.oficial/" target="_blank" class="instagram-link">
+                        <i class="fab fa-instagram instagram-icon"></i>
+                        <span>Siga a Charles no Instagram!</span>
+                    </a>
+                    <div class="instagram-preview">
+                        <img src="https://via.placeholder.com/150x150?text=Post+1" alt="Instagram Post 1">
+                        <img src="https://via.placeholder.com/150x150?text=Post+2" alt="Instagram Post 2">
+                        <img src="https://via.placeholder.com/150x150?text=Post+3" alt="Instagram Post 3">
+                        <img src="https://via.placeholder.com/150x150?text=Post+4" alt="Instagram Post 4">
+                        <img src="https://via.placeholder.com/150x150?text=Post+5" alt="Instagram Post 5">
+                    </div>
+                </div>
             </section>
         </main>
     </div>
@@ -78,10 +197,11 @@
     <div id="newCallModal" class="modal-overlay">
         <div class="modal-content">
             <span class="close-button material-icons">close</span>
-            <h2>NEW TICKET</h2> <form id="newCallForm">
+            <h2>NOVO CHAMADO</h2>
+            <form id="newCallForm">
                 <div class="form-group">
                     <label for="callerName">Nome:</label>
-                    <input type="text" id="callerName" name="callerName" readonly>
+                    <input type="text" id="callerName" name="callerName" value="Usuário Suporte" readonly>
                 </div>
                 <div class="form-group">
                     <label for="callDate">Data:</label>
@@ -123,6 +243,5 @@
             </form>
         </div>
     </div>
-    <script src="javascript/Home.js"></script>
 </body>
 </html>
