@@ -151,3 +151,91 @@ function togglePassword(inputId) {
     icon.classList.add("fa-eye");
   }
 }
+document.addEventListener('DOMContentLoaded', () => {
+    const carouselTrack = document.querySelector('.carousel-track');
+    const carouselItems = Array.from(carouselTrack.children);
+    const prevButton = document.querySelector('.carousel-button.prev');
+    const nextButton = document.querySelector('.carousel-button.next');
+    const carouselDotsContainer = document.querySelector('.carousel-dots');
+
+    let currentIndex = 0;
+    let itemWidth = carouselItems[0].offsetWidth + (parseFloat(getComputedStyle(carouselItems[0]).marginRight) * 2); // Largura do item + margem
+
+    // Função para atualizar a largura do item e margens (para responsividade)
+    const updateItemWidth = () => {
+        if (carouselItems.length > 0) {
+            const itemMarginRight = parseFloat(getComputedStyle(carouselItems[0]).marginRight);
+            const itemMarginLeft = parseFloat(getComputedStyle(carouselItems[0]).marginLeft);
+            itemWidth = carouselItems[0].offsetWidth + itemMarginLeft + itemMarginRight;
+        }
+    };
+
+    // Gera os pontos de navegação
+    const generateDots = () => {
+        carouselDotsContainer.innerHTML = ''; // Limpa os pontos existentes
+        carouselItems.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => {
+                moveToSlide(index);
+            });
+            carouselDotsContainer.appendChild(dot);
+        });
+    };
+
+    // Move o carrossel para um slide específico
+    const moveToSlide = (index) => {
+        currentIndex = index;
+        const offset = -currentIndex * itemWidth;
+        carouselTrack.style.transform = `translateX(${offset}px)`;
+        updateDots();
+    };
+
+    // Atualiza o estado dos pontos
+    const updateDots = () => {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            if (index === currentIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    };
+
+    // Navegação para o próximo slide
+    const slideNext = () => {
+        if (currentIndex < carouselItems.length - 1) {
+            moveToSlide(currentIndex + 1);
+        } else {
+            moveToSlide(0); // Volta para o início se estiver no final
+        }
+    };
+
+    // Navegação para o slide anterior
+    const slidePrev = () => {
+        if (currentIndex > 0) {
+            moveToSlide(currentIndex - 1);
+        } else {
+            moveToSlide(carouselItems.length - 1); // Vai para o final se estiver no início
+        }
+    };
+
+    // Event Listeners para os botões
+    nextButton.addEventListener('click', slideNext);
+    prevButton.addEventListener('click', slidePrev);
+
+    // Atualiza a largura do item e reajusta o carrossel ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        updateItemWidth();
+        moveToSlide(currentIndex); // Reajusta a posição do slide atual
+    });
+
+    // Inicializa o carrossel
+    updateItemWidth();
+    generateDots();
+    moveToSlide(currentIndex);
+});
