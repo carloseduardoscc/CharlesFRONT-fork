@@ -1,7 +1,7 @@
 import { callApi } from './api.js';
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ============ TEXTO ANIMADO ============
+  // ============ TEXTO ANIMADO - VERSÃO REFATORADA ============
   const typedTextSpan = document.querySelector(".texto-animado");
   if (typedTextSpan) {
     const textArray = ["em cada Solicitação", "em cada Chamado", "É Charles²"];
@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const newTextDelay = 1000;
     let textArrayIndex = 0;
     let charIndex = 0;
+    let isTyping = true;
 
     function type() {
       if (charIndex < textArray[textArrayIndex].length) {
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
         charIndex++;
         setTimeout(type, typingDelay);
       } else {
+        isTyping = false;
         setTimeout(erase, newTextDelay);
       }
     }
@@ -27,19 +29,15 @@ document.addEventListener("DOMContentLoaded", () => {
         charIndex--;
         setTimeout(erase, erasingDelay);
       } else {
-        textArrayIndex++;
-        if (textArrayIndex >= textArray.length) textArrayIndex = 0;
+        isTyping = true;
+        textArrayIndex = (textArrayIndex + 1) % textArray.length;
         setTimeout(type, typingDelay + 500);
       }
     }
 
-    function init() {
-      typedTextSpan.textContent = textArray[textArrayIndex];
-      charIndex = textArray[textArrayIndex].length;
-      setTimeout(erase, newTextDelay);
-    }
-
-    init();
+    // Inicia com o texto vazio e começa a digitar
+    typedTextSpan.textContent = "";
+    setTimeout(type, typingDelay + 500);
   }
 
   // ============ REQUISIÇÃO DE CONTATO ============
@@ -151,6 +149,8 @@ function togglePassword(inputId) {
     icon.classList.add("fa-eye");
   }
 }
+
+// Código do carrossel (mantido igual)
 document.addEventListener('DOMContentLoaded', () => {
     const carouselTrack = document.querySelector('.carousel-track');
     const carouselItems = Array.from(carouselTrack.children);
@@ -159,9 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const carouselDotsContainer = document.querySelector('.carousel-dots');
 
     let currentIndex = 0;
-    let itemWidth = carouselItems[0].offsetWidth + (parseFloat(getComputedStyle(carouselItems[0]).marginRight) * 2); // Largura do item + margem
+    let itemWidth = carouselItems[0].offsetWidth + (parseFloat(getComputedStyle(carouselItems[0]).marginRight) * 2);
 
-    // Função para atualizar a largura do item e margens (para responsividade)
     const updateItemWidth = () => {
         if (carouselItems.length > 0) {
             const itemMarginRight = parseFloat(getComputedStyle(carouselItems[0]).marginRight);
@@ -170,9 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Gera os pontos de navegação
     const generateDots = () => {
-        carouselDotsContainer.innerHTML = ''; // Limpa os pontos existentes
+        carouselDotsContainer.innerHTML = '';
         carouselItems.forEach((_, index) => {
             const dot = document.createElement('div');
             dot.classList.add('dot');
@@ -186,7 +184,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Move o carrossel para um slide específico
     const moveToSlide = (index) => {
         currentIndex = index;
         const offset = -currentIndex * itemWidth;
@@ -194,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDots();
     };
 
-    // Atualiza o estado dos pontos
     const updateDots = () => {
         const dots = document.querySelectorAll('.dot');
         dots.forEach((dot, index) => {
@@ -206,36 +202,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Navegação para o próximo slide
     const slideNext = () => {
         if (currentIndex < carouselItems.length - 1) {
             moveToSlide(currentIndex + 1);
         } else {
-            moveToSlide(0); // Volta para o início se estiver no final
+            moveToSlide(0);
         }
     };
 
-    // Navegação para o slide anterior
     const slidePrev = () => {
         if (currentIndex > 0) {
             moveToSlide(currentIndex - 1);
         } else {
-            moveToSlide(carouselItems.length - 1); // Vai para o final se estiver no início
+            moveToSlide(carouselItems.length - 1);
         }
     };
 
-    // Event Listeners para os botões
     nextButton.addEventListener('click', slideNext);
     prevButton.addEventListener('click', slidePrev);
 
-    // Atualiza a largura do item e reajusta o carrossel ao redimensionar a janela
     window.addEventListener('resize', () => {
         updateItemWidth();
-        moveToSlide(currentIndex); // Reajusta a posição do slide atual
+        moveToSlide(currentIndex);
     });
 
-    // Inicializa o carrossel
     updateItemWidth();
     generateDots();
     moveToSlide(currentIndex);
 });
+// Função para exibir o modal de login
+function showLoginModal() {
+  const modal = document.getElementById("loginModal");
+  if (modal) {
+    modal.style.display = "block";
+  }
+}
+
+// Função para exibir o modal de confirmação de saída
+function showExitConfirmationModal() {
+  const modal = document.getElementById("exitConfirmationModal");
+  if (modal) {
+    modal.style.display = "block";
+  }
+}

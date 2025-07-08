@@ -256,13 +256,14 @@
           <label for="lastName">Sobrenome</label>
           <input type="text" id="lastName" name="lastName" required>
         </div>
+      <br>
       
       
-      <div class="form-row">
         <div class="form-group">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
         </div>
+        <br>
         <div class="form-group">
           <label for="position">Cargo</label>
           <input type="text" id="position" name="position" required>
@@ -274,6 +275,8 @@
           <label for="password">Senha</label>
           <input type="password" id="password" name="password" required minlength="8">
         </div>
+        <br>
+      
         <div class="form-group">
           <label for="confirmPassword">Confirmar Senha</label>
           <input type="password" id="confirmPassword" name="confirmPassword" required>
@@ -346,7 +349,22 @@
           <button type="button" class="select-btn">Selecionar</button>
         </div>
       </div>
-      
+
+      <!-- Card premium -->
+      <div class="profile-card" data-profile="premium">
+        <div class="card-icon">
+          <span class="material-icons">star</span>
+        </div>
+        <h2>Premium</h2>
+        <ul class="features-list">
+          <li>Acesso a recursos exclusivos</li>
+          <li>Suporte prioritário</li>
+          <li>Relatórios avançados</li>
+          <li>Customização de interface</li>
+        </ul>
+        <button type="button" class="select-btn">Selecionar</button>
+      </div>
+
       <input type="hidden" id="selectedProfile" name="selectedProfile" value="">
       
       <button type="submit" class="submit-btn">Cadastrar</button>
