@@ -146,5 +146,29 @@
       </div>
     </main>
   </div>
+
+  <!-- Adicione a biblioteca SheetJS -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Seleciona o botão de exportar
+      const exportBtn = document.querySelector('.export-btn');
+      
+      // Adiciona o evento de clique
+      exportBtn.addEventListener('click', exportToExcel);
+      
+      function exportToExcel() {
+        // Seleciona a tabela
+        const table = document.querySelector('.database-table');
+        
+        // Cria uma nova planilha do Excel
+        const wb = XLSX.utils.table_to_book(table, {sheet: "Usuários"});
+        
+        // Gera o arquivo Excel e faz o download
+        XLSX.writeFile(wb, 'usuarios.xlsx');
+      }
+    });
+  </script>
 </body>
 </html>
